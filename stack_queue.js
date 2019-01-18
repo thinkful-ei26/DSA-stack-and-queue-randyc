@@ -1,16 +1,16 @@
 'use strict';
 
-//Node class
-class _Node {
+//Node class for stack
+// class _Node {
 
-  constructor(data,next){
+//   constructor(data,next){
 
-    this.data;
-    this.next;
+//     this.data;
+//     this.next;
  
-  }
+//   }
 
-}
+// }
 
 //Stack class
 class Stack {
@@ -45,4 +45,79 @@ class Stack {
 
 }
 
-//
+
+
+//Node class for Queue -- double link list node
+class _Node {
+
+  constructor(value) {
+    
+    this.value = value;
+    this.next = null;
+    this.prev = null;
+
+  }
+
+}
+
+
+//Queue class
+class Queue {
+
+  constructor() {
+
+    this.first = null;
+    this.last = null;
+
+  }
+
+  enqueue(data){
+
+    //prepare a new node with the incoming data
+    const newNode = new _Node(data);
+
+    //if the first item in line is null then this new node becomes the first in line
+    if(this.first === null){
+
+      this.first = newNode;
+
+    }
+
+    //if there is somethign in the last node then...
+    if(this.last) {
+
+      newNode.next = this.last;//assign the 'LAST' from the current end node to the new node 'NEXT'
+      this.last.prev = newNode;//assign the current last node's 'PREV' to point to the new node
+       
+    }
+
+    this.last = newNode;//assign the 'LAST' as the new node..
+     
+  }
+
+  dequeue(){
+
+    //if nothing is there then in the first place then there is no more list...
+    if(this.first === null){
+      new Error('Nothing left to get');
+      return Error;
+    }
+ 
+    const getNode = this.first;//get the node from the first in line
+    this.first = getNode.prev;//assign the new first in line to point to the 'PREV' of the old first in line
+
+    //if the new node is equal to the last then assign the list's last to null
+    if(getNode === this.last) {
+
+      this.last = null;
+ 
+    }
+
+    return getNode.value;//send back the data held in the node that was first in line...
+      
+  }
+
+ 
+}
+
+
