@@ -139,6 +139,8 @@ function Main() {
 const palindromeStack = new Stack();
 
 function is_palindrome(stack) {
+ 
+  stack = stack.toLowerCase().replace(/[^a-zA-Z0-9]/g, '');
 
   if(!stack || stack.length < 2){
 
@@ -147,7 +149,6 @@ function is_palindrome(stack) {
 
   }
 
-  stack = stack.toLowerCase().replace(/[^a-zA-Z0-9]/g, '');
   
   let stackLength = 0;
 
@@ -238,7 +239,7 @@ function is_palindrome(stack) {
 
 
 // true, true, true
-console.log(is_palindrome(''));
+console.log(is_palindrome('((()))'));
 console.log(is_palindrome('x12s'));
 console.log(is_palindrome('zabaz'));
 console.log(is_palindrome('mmwe3'));
@@ -249,20 +250,27 @@ console.log(is_palindrome('1001'));
 console.log(is_palindrome('Tauhida'));
 
 
-// Matching parentheses checker...
+// Matching parentheses checker .... 
+//similar to palindrome approach...
+//
  
 const testStack = new Stack();
 
 function matchingClosures(stack) {
 
+  //get rid of everything except ( and ) in the equation
+  stack = stack.toLowerCase().replace(/[^()]/g,'');
+
   if(!stack || stack.length < 2){
 
-    console.log('Cannot process -- must be a string of at least 2 characters...');
+    console.log('Cannot process -- must have at least 2 characters...');
     return;
 
   }
 
-  stack = stack.toLowerCase().replace(/[^a-zA-Z0-9]/g, '');
+  //if the length is ever odd then there are not the proper amount of parentheses but =for practice...
+
+  console.log(stack);
   
   let stackLength = 0;
 
@@ -338,7 +346,7 @@ function matchingClosures(stack) {
     //compare values
     if(leftValue !== rightValue) {
 
-      console.log(stack + ' IS NOT A PALINDROME');
+      console.log(stack + ' IS MISSING A CLOSING PARENTHESES');
       return false;
 
     }
@@ -347,7 +355,9 @@ function matchingClosures(stack) {
  
   }
  
-  console.log(stack + ' IS A PALINDROME!');
+  console.log(stack + ' HAS PROPER CLOSING PARENTHESES!');
   return true; 
  
 }
+
+console.log(matchingClosures('(a + b) = (9 - 2)/22 + 114 - (86))'));
